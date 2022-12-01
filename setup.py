@@ -6,14 +6,16 @@ with open("README.md", "r") as fh:
 with open("requirements.txt", "r") as fh:
     requirements = fh.readlines()
 
+extras = {"lightning": ["pytorch-lightning"]}
+
 setuptools.setup(
     name="rtpt",
-    version="0.0.4",
-    author="Quentin Delfosse, Patrick Schramowski, Steven Lang, Johannes Czech",
+    version="0.0.5",
+    author="Quentin Delfosse, Patrick Schramowski, Steven Lang, Johannes Czech, Maurice Kraus",
     author_email="quentin.delfosse@cs.tu-darmstadt.de",
     description="Remaining Time to Process Title",
     long_description=long_description,
-    long_description_content_type='text/markdown',
+    long_description_content_type="text/markdown",
     url="https://github.com/ml-research/rtpt",
     packages=setuptools.find_packages(),
     classifiers=[
@@ -22,4 +24,5 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     install_requires=requirements,
+    extras_require=extras,
 )
