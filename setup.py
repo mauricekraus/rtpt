@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 with open("requirements.txt", "r") as fh:
     requirements = fh.readlines()
 
-extras = {"lightning": ["pytorch-lightning"]}
+extras = {"lightning": ["pytorch-lightning"], "tensorflow": ["tensorflow"]}
 
 setuptools.setup(
     name="rtpt",
