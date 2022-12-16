@@ -37,11 +37,11 @@ class RTPTCallback(Callback):
         self.__mode = mode
 
     def on_train_start(self, trainer: Trainer, pl_module: LightningModule):
-        print("Training is starting")
+        print("[RTPT]: Starting Training")
         self.__rtpt.start()
 
     def on_train_end(self, trainer: Trainer, pl_module: LightningModule):
-        print("Training is ending")
+        print("[RTPT]: Training ended")
         self.__rtpt.step(subtitle="done")
 
     def on_step(self, trainer: Trainer):
