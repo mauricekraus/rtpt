@@ -2,11 +2,10 @@ from typing import Optional
 
 
 try:
-    from pytorch_lightning.callbacks import Callback
+    from lightning.pytorch.callbacks import Callback
     from typing import Literal, Callable, Any
     from .rtpt import RTPT
-    import pytorch_lightning as pl
-    from pytorch_lightning import Trainer, LightningModule
+    from lightning import Trainer, LightningModule
 
 
 except ModuleNotFoundError as err:
