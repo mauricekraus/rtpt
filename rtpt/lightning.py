@@ -21,27 +21,32 @@ class RTPTCallback(Callback):
         name_initials: str,
         experiment_name: str,
         max_iterations: int,
+        current_job: int = 1,
+        num_jobs: int = 1,
         mode: Literal["val", "train"] = "train",
         subtitle_fn: Optional[Callable[[dict[str, Any]], str]] = None,
     ) -> None:
+        # Support for multi job training
         super().__init__()
 
         self.subtitle_fn = subtitle_fn
 
         self.__rtpt = RTPT(
             name_initials=name_initials,
-            experiment_name=experiment_name,
-            max_iterations=max_iterations,
+            experiment_name=f"{experiment_name} ({current_job}:{num_jobs})",
+            max_iterations=max_iterations * (num_jobs - current_job + 1),
         )
+        self.num_jobs = num_jobs
+        self.current_job = current_job
         self.__mode = mode
 
     def on_train_start(self, trainer: Trainer, pl_module: LightningModule):
-        print("[RTPT]: Starting Training")
+        print(f"[RTPT]: Starting Training {self.current_job}:{self.num_jobs}")
         self.__rtpt.start()
 
     def on_train_end(self, trainer: Trainer, pl_module: LightningModule):
         print("[RTPT]: Training ended")
-        self.__rtpt.step(subtitle="done")
+        self.__rtpt.step(subtitle=f"done ({self.current_job}:{self.num_jobs})")
 
     def on_step(self, trainer: Trainer):
         subtitle = (
