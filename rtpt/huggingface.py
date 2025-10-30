@@ -51,6 +51,7 @@ class RTPTCallback(TrainerCallback):
             train_dataloader = kwargs.get("train_dataloader")
             max_iterations = self.__resolve_max_iterations(args, state, train_dataloader)
             total_iterations = max_iterations * (self.num_jobs - self.current_job + 1)
+            print(f"[RTPT]: Found {total_iterations} Iterations")
             self.__rtpt = RTPT(
                 name_initials=self.__name_initials,
                 experiment_name=f"{self.__experiment_name} ({self.current_job}:{self.num_jobs})",
